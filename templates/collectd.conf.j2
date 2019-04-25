@@ -56,7 +56,8 @@ LoadPlugin write_graphite
 <Plugin write_graphite>
   <Node "{{inventory_hostname}}">
 {% for name, value in collectd_write_graphite_options.items() %}
-    {{ name }} "{{ value }}"
+    {{ name }} {% if value not in ['true', 'false'] %}"{% endif %}{{ value }}{% if value not in ['true', 'false'] %}"{% endif %}
+
 {% endfor %}
   </Node>
 </Plugin>
